@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-
+import Cookies from "js-cookie";
 import "./index.css";
 
 const Registration = () => {
+  console.log(Cookies.get("token"));
   const [name, Name1] = useState("");
   const [email, Email1] = useState("");
   const [retypeEmail, RetypeEmail] = useState("");

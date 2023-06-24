@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import Cookies from "js-cookie";
 
@@ -23,10 +23,11 @@ const Fill = () => {
   const [zipCode, ZipCode] = useState("");
   const navigate = useNavigate();
 
-  if (Cookies.get("token") === undefined) {
-    navigate("/");
-  }
-  Cookies.get("token");
+  useEffect(() => {
+    if (Cookies.get("token") === undefined) {
+      navigate("/");
+    }
+  });
   console.log(Cookies.get("token"));
   const Submit = (event) => {
     event.preventDefault();
