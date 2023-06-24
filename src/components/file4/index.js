@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 import "./index.css";
 
 const Registration = () => {
@@ -10,6 +11,12 @@ const Registration = () => {
   const [password, Password] = useState("");
   const [retypePassword, RetypePassword] = useState("");
   const [error, error1] = useState(false);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (Cookies.get("token") !== undefined) {
+      navigate("/fill");
+    }
+  });
 
   const Name = (event) => {
     Name1(event.target.value);
