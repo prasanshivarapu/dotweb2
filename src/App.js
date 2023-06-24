@@ -1,12 +1,18 @@
-import WelcomePage from "./components/file2";
-import SignupForm from "./components/file1";
+import React from "react";
+
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+import MainPage from "./components/file";
+import Fill from "./components/file3";
 import "./App.css";
 
 const App = () => (
-  <div className="app">
-    <WelcomePage />
-    <SignupForm />
-  </div>
+  <Router>
+    <Routes>
+      <Route path="/" element={<MainPage />} />
+      <Route path="/fill" element={<Fill />} />
+    </Routes>
+  </Router>
 );
 
 export default App;
