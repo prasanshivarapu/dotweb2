@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import Fill from "../file3";
@@ -7,6 +8,9 @@ import "./index.css";
 
 const SignupForm = () => {
   const [btn, setBtn] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    Cookies.get("token") !== undefined
+  );
   const [input1, setInput1] = useState("");
   const [password1, setPassword1] = useState("");
   const [error, seterror] = useState(false);
@@ -23,11 +27,15 @@ const SignupForm = () => {
   const passwordText = (event) => {
     setPassword1(event.target.value);
   };
-
+  const register = () => {
+    navigate("/registration");
+  };
   const loginTo = (event) => {
     event.preventDefault();
 
     if (input1 === "prasan" && password1 === "prasan") {
+      Cookies.set("token", 1234, { expires: 30 });
+      console.log(Cookies.get("token") === undefined);
       navigate("/fill");
     } else {
       seterror(true);
@@ -77,7 +85,7 @@ const SignupForm = () => {
         </button>
       </form>
       <p>New to RentalApp?</p>
-      <button className="button2" type="button">
+      <button className="button2" type="button" onClick={register}>
         Register
       </button>
     </div>

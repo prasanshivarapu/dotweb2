@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import Cookies from "js-cookie";
+
 import { useNavigate } from "react-router-dom";
 import "./index.css";
 
@@ -12,12 +14,20 @@ const Fill = () => {
   const [email, Email] = useState("");
   const [gender, Gender] = useState("");
   const [dob, Dob] = useState("");
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    Cookies.get("token") !== undefined
+  );
   const [address, Address] = useState("");
   const [townCity, TownCity] = useState("");
   const [regionState, RegionState] = useState("");
   const [zipCode, ZipCode] = useState("");
   const navigate = useNavigate();
 
+  if (Cookies.get("token") === undefined) {
+    navigate("/");
+  }
+  Cookies.get("token");
+  console.log(Cookies.get("token"));
   const Submit = (event) => {
     event.preventDefault();
 
@@ -25,6 +35,8 @@ const Fill = () => {
   };
 
   const logout = () => {
+    Cookies.remove("token");
+    setIsAuthenticated(false);
     navigate("/");
   };
 
